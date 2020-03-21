@@ -2,6 +2,10 @@ FROM r-base
 MAINTAINER Emil Lykke Jensen <elj@pension.dk>
 
 
+# Install dependencies for highchartr
+RUN apt-get update && apt-get install -y libxml2-dev
+
+
 # Install packages used by c19overblik
 RUN R -e "install.packages(c('shiny', 'shinyWidgets', 'data.table', 'magrittr', 'highcharter', 'jsonlite'))"
 
