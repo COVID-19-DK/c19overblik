@@ -1,4 +1,9 @@
 function(input, output) {
+    
+    GlobalTimeline <- reactive({
+        get_GlobalTimeline()
+    })
+    
 
     output$plot_GlobalTimeline <- highcharter::renderHighchart({
         
@@ -7,7 +12,7 @@ function(input, output) {
         
         shiny::withProgress(message = "Henter data...", value = NULL, {
             
-            GlobalTimeline <- copy(get_GlobalTimeline())
+            GlobalTimeline <- GlobalTimeline()
             
             if(show_x == "date") GlobalTimeline[, x := date]
             if(show_x == "infected"){
