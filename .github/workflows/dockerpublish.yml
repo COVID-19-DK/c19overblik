@@ -18,9 +18,7 @@ env:
   IMAGE_NAME: c19overblik
 
 jobs:
-  push:
-    # Ensure test job passes before pushing image.
-    needs: test
+  build&push:
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
