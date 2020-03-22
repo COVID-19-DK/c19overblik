@@ -18,7 +18,7 @@ env:
   IMAGE_NAME: c19overblik
 
 jobs:
-  build&push:
+  build-and-push:
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
