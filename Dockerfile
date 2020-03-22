@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y libxml2-dev libssl-dev
 
 
 # Install packages used by c19overblik
-RUN R -e "install.packages(c('shiny', 'shinyWidgets', 'data.table', 'magrittr', 'highcharter', 'jsonlite'))"
+RUN R -e "install.packages(c('shiny', 'shinyWidgets', 'data.table', 'magrittr', 'highcharter', 'jsonlite', 'colorspace'))"
 
 
 # Create app dir
@@ -17,6 +17,7 @@ WORKDIR /app
 
 # Copy R files to Docker
 COPY /functions /app/functions
+COPY /server /app/server
 COPY *.R /app/
 
 

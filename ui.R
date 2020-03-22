@@ -8,7 +8,55 @@ fluidPage(
     tabsetPanel(
       type = "tabs",
       
-      # tabPanel("Danmark"),
+      tabPanel(
+        title = "Danmark",
+        
+        div(
+          style = "float: left;",
+          checkboxGroupButtons(
+            inputId = "DT_show_y1",
+            label = "Vis:", 
+            choices = c("Indlagte" = "hospitalized", "Testede/smittede" = "cases"), 
+            justified = FALSE,
+            size = "sm",
+            selected = "hospitalized",
+            status = "primary",
+            checkIcon = list(
+              yes = tags$i(class = "fa fa-circle", 
+                           style = "color: steelblue"),
+              no = tags$i(class = "fa fa-circle-o", 
+                          style = "color: steelblue"))
+          )
+        ),
+        
+        div(
+          style="margin-top: 10px;",
+          
+          div(
+            style = "float: left; margin-left: 20px;",
+            checkboxGroupButtons(
+              inputId = "DT_show_y2",
+              label = "Vis:", 
+              choices = c("Antal akkumulerede over tid" = "total", "Antal nye pr. dag" = "daily"), 
+              justified = FALSE,
+              size = "sm",
+              selected = "total",
+              status = "primary",
+              checkIcon = list(
+                yes = tags$i(class = "fa fa-circle", 
+                             style = "color: steelblue"),
+                no = tags$i(class = "fa fa-circle-o", 
+                            style = "color: steelblue"))
+            )
+          )
+          
+        ),
+        
+        div(style = "clear: left", highchartOutput("plot_DanishTimeline", height = "calc(100vh - 220px)")),
+        
+        p("Kilde: ", a("http://www.covid19data.dk", href = "http://www.covid19data.dk", target = "_blank"))
+        
+        ),
       
       tabPanel(
         title = "Global",
@@ -19,7 +67,7 @@ fluidPage(
           div(
             style = "float: left;",
             pickerInput(
-              inputId = "country",
+              inputId = "GT_country",
               label = "Lande:", 
               choices = landelist,
               selected = c("Denmark", "Finland", "Norway", "Sweden", "USA", "UK", "Italy", "Germany", "France", "China"),
@@ -33,7 +81,7 @@ fluidPage(
           div(
             style = "float: left; margin-left: 20px;",
             radioGroupButtons(
-              inputId = "show_x",
+              inputId = "GT_show_x",
               label = "Vis tid efter:", 
               choices = c("Dato" = "date", "Dage fra første registerede smittede" = "infected", "Dage fra første registede død" = "dead"), 
               justified = FALSE,
@@ -51,7 +99,7 @@ fluidPage(
           div(
             style = "float: left; margin-left: 20px;",
             radioGroupButtons(
-              inputId = "show_y",
+              inputId = "GT_show_y",
               label = "Vis:", 
               choices = c("Antal registrede smittede" = "infected", "Antal døde" = "dead", "Antal raske" = "recovered"), 
               justified = FALSE,
@@ -70,6 +118,8 @@ fluidPage(
         ),
         
         div(style = "clear: left", highchartOutput("plot_GlobalTimeline", height = "calc(100vh - 220px)")),
+        
+        p("Kilde: ", a("https://thevirustracker.com", href = "https://thevirustracker.com", target = "_blank"))
         
       )
       
