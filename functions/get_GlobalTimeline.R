@@ -1,3 +1,11 @@
+get_GlobalTimeline_covid19data <- function(){
+  
+  GlobalTimeline <- jsonlite::read_json("https://api.covid19data.dk:443/worldometers_overview")
+  GlobalTimeline <- rbindlist(GlobalTimeline)
+  
+}
+
+
 get_GlobalTimeline <- function(){
   
   GlobalTimeline <- jsonlite::read_json("https://thevirustracker.com/timeline/map-data.json")
