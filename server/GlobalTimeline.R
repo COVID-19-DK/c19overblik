@@ -1,7 +1,4 @@
 
-# Load GlobalTimeline data
-GlobalTimeline <- get_GlobalTimeline()
-
 output$plot_GlobalTimeline <- highcharter::renderHighchart({
   
   show_x <- input$GT_show_x

@@ -1,6 +1,4 @@
 
-DanishTimeline <- get_DanishTimeline()
-
 output$plot_DanishTimeline <- highcharter::renderHighchart({
   
   show_y1 <- input$DT_show_y1
