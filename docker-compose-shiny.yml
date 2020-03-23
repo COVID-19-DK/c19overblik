@@ -1,0 +1,16 @@
+version: '3'
+
+networks:
+  default:
+    external:
+      name: root_covid19data_network
+
+services:
+
+  shiny:
+    container_name: shiny
+    image: c19overblik:latest
+    environment:
+      VIRTUAL_HOST: c19overblik.dk
+      LETSENCRYPT_HOST: c19overblik.dk
+      VIRTUAL_PORT: 3838
