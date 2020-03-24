@@ -6,9 +6,8 @@ MAINTAINER Emil Lykke Jensen <elj@pension.dk>
 RUN apt-get update && apt-get install -y libxml2-dev libcurl4-openssl-dev
 
 
-# Install packages from packrat source
-COPY /packrat/src/ /src/
-RUN R -e "install.packages(list.files(list.files('/src/', full.names = TRUE), full.names = TRUE), repos = NULL)"
+# Install packages used by c19overblik
+RUN R -e "install.packages(c('shiny', 'shinyWidgets', 'data.table', 'magrittr', 'highcharter', 'jsonlite', 'colorspace'))"
 
 
 # Create app dir
