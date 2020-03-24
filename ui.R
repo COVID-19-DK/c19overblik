@@ -15,7 +15,7 @@ fluidPage(
           style="margin-top: 10px;",
           
           div(
-            style = "float: left;",
+            style = "float: left; margin-right: 20px;",
             checkboxGroupButtons(
               inputId = "DT_show_y1",
               label = "Vis:", 
@@ -23,7 +23,6 @@ fluidPage(
               justified = FALSE,
               size = "sm",
               selected = "hospitalized",
-              status = "primary",
               checkIcon = list(
                 yes = tags$i(class = "fa fa-circle", 
                              style = "color: steelblue"),
@@ -33,7 +32,7 @@ fluidPage(
           ),
           
           div(
-            style = "float: left; margin-left: 20px;",
+            style = "float: left;",
             checkboxGroupButtons(
               inputId = "DT_show_y2",
               label = "Vis:", 
@@ -41,7 +40,6 @@ fluidPage(
               justified = FALSE,
               size = "sm",
               selected = "total",
-              status = "primary",
               checkIcon = list(
                 yes = tags$i(class = "fa fa-circle", 
                              style = "color: steelblue"),
@@ -52,9 +50,13 @@ fluidPage(
           
         ),
         
-        div(style = "clear: left", highchartOutput("plot_DanishTimeline", height = "calc(100vh - 220px)")),
+        div(style = "clear: left", 
+            shinycssloaders::withSpinner(
+              highchartOutput("plot_DanishTimeline", height = "calc(100vh - 220px)"),
+              proxy.height = "calc(100vh - 220px)")
+            ),
         
-        p("Kilde: ", a("http://www.covid19data.dk", href = "http://www.covid19data.dk", target = "_blank"))
+        p("Kilde: ", a("covid19data.dk", href = "http://covid19data.dk", target = "_blank"))
         
         ),
       
@@ -62,10 +64,10 @@ fluidPage(
         title = "Verden",
 
         div(
-          style="margin-top: 10px; margin-left: 10px;",
+          style="margin-top: 10px; margin-right: 20px;",
 
           div(
-            style = "float: left;",
+            style = "float: left; margin-right: 20px;",
             pickerInput(
               inputId = "GT_country",
               label = "Lande:",
@@ -79,7 +81,7 @@ fluidPage(
           ),
 
           div(
-            style = "float: left; margin-left: 20px;",
+            style = "float: left; margin-right: 20px;",
             radioGroupButtons(
               inputId = "GT_show_x",
               label = "Vis tid efter:",
@@ -87,7 +89,6 @@ fluidPage(
               justified = FALSE,
               size = "sm",
               selected = "date",
-              status = "primary",
               checkIcon = list(
                 yes = tags$i(class = "fa fa-circle",
                              style = "color: steelblue"),
@@ -97,7 +98,7 @@ fluidPage(
           ),
 
           div(
-            style = "float: left; margin-left: 20px;",
+            style = "float: left;",
             radioGroupButtons(
               inputId = "GT_show_y",
               label = "Vis:",
@@ -105,7 +106,6 @@ fluidPage(
               justified = FALSE,
               size = "sm",
               selected = "infected",
-              status = "primary",
               checkIcon = list(
                 yes = tags$i(class = "fa fa-circle",
                              style = "color: steelblue"),
@@ -117,11 +117,15 @@ fluidPage(
 
         ),
 
-        div(style = "clear: left", highchartOutput("plot_GlobalTimeline", height = "calc(100vh - 220px)")),
+        div(style = "clear: left",
+            shinycssloaders::withSpinner(
+              highchartOutput("plot_GlobalTimeline", height = "calc(100vh - 220px)"),
+              proxy.height = "calc(100vh - 220px)")
+            ),
 
-        p("Kilde: ", a("https://thevirustracker.com", href = "https://thevirustracker.com", target = "_blank"))
+        p("Kilde: ", a("thevirustracker.com", href = "https://thevirustracker.com", target = "_blank"))
 
-      )
+      ),
       
       # tabPanel(
       #   title = "Fremskrivning",
@@ -138,7 +142,6 @@ fluidPage(
       #         justified = FALSE,
       #         size = "sm",
       #         selected = "hospitalized",
-      #         status = "primary",
       #         checkIcon = list(
       #           yes = tags$i(class = "fa fa-circle", 
       #                        style = "color: steelblue"),
@@ -149,7 +152,27 @@ fluidPage(
       #     
       #   )
       #   
-      # )
+      # ),
+      
+      tabPanel(
+        title = "Om",
+        
+        fluidRow(
+          column(width = 12,
+                 style = "margin:40px 20px 0px 20px",
+                 
+                 p("Vil du bidrage til c19overblik.dk kontakt", tags$a(href = "https://www.linkedin.com/in/emillykkejensen/", target ="_blank", "Emil Lykke Jensen")),
+                 
+                 p(icon("github"), "Find koden på GitHub:", a("www.github.com/covid19dk/c19overblik", href = "https://github.com/covid19dk/c19overblik")),
+                 
+                 p("Kilde: ", a("covid19data.dk", href = "http://covid19data.dk", target = "_blank")),
+                 
+                 p("Kilde: ", a("thevirustracker.com", href = "https://thevirustracker.com", target = "_blank"))
+                 
+                 
+          ))
+        
+      )
       
     )
   )

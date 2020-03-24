@@ -289,6 +289,12 @@ Version: 0.5.1
 Hash: 94cf169fce3b79ae1301b787bb1cc276
 Requires: htmltools, jsonlite, scales, shiny
 
+Package: shinycustomloader
+Source: CRAN
+Version: 0.9.0
+Hash: 536dc6bddbb873e922d5b6ad7560d8c2
+Requires: glue, shiny
+
 Package: sourcetools
 Source: CRAN
 Version: 0.1.7

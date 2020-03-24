@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y libxml2-dev libcurl4-openssl-dev
 
 
 # Install packages used by c19overblik
-RUN R -e "install.packages(c('shiny', 'shinyWidgets', 'data.table', 'magrittr', 'highcharter', 'jsonlite', 'colorspace'))"
+RUN R -e "install.packages(c('shiny', 'shinyWidgets', 'data.table', 'magrittr', 'highcharter', 'jsonlite', 'colorspace', 'shinycssloaders'))"
 
 
 # Create app dir
