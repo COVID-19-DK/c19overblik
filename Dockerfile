@@ -6,8 +6,9 @@ MAINTAINER Emil Lykke Jensen <elj@pension.dk>
 RUN apt-get update && apt-get install -y libxml2-dev libcurl4-openssl-dev
 
 
-# Install packrat
-RUN R -e "install.packages('packrat', repos='http://cran.rstudio.com', dependencies = TRUE)"
+# Install packages from packrat source
+COPY /packrat/scr/ /scr/
+RUN R -e "install.packages(list.files(list.files('/src/', full.names = TRUE), full.names = TRUE), repos = NULL)"
 
 
 # Create app dir
@@ -18,12 +19,7 @@ WORKDIR /app
 # Copy R files to Docker
 COPY /functions /app/functions
 COPY /server /app/server
-COPY /packrat /app/packrat
 COPY *.R /app/
-
-
-# Restore packrat
-RUN R -e "packrat::restore('/app/')"
 
 
 # Expose Shiny port and run
