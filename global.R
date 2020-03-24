@@ -1,3 +1,5 @@
+source("packrat/init.R")
+
 suppressPackageStartupMessages(library(shiny))
 suppressPackageStartupMessages(library(jsonlite))
 suppressPackageStartupMessages(library(data.table))
