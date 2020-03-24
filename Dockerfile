@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y libxml2-dev libcurl4-openssl-dev
 
 
 # Install packages from packrat source
-COPY /packrat/scr/ /scr/
+COPY /packrat/src/ /src/
 RUN R -e "install.packages(list.files(list.files('/src/', full.names = TRUE), full.names = TRUE), repos = NULL)"
 
 
