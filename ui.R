@@ -85,7 +85,7 @@ fluidPage(
             radioGroupButtons(
               inputId = "GT_show_x",
               label = "Vis tid efter:",
-              choices = c("Dato" = "date", "Dage fra første registerede smittede" = "infected", "Dage fra første registede død" = "dead"),
+              choices = c("Dato" = "date", "Dage fra første registerede smittede" = "day_infected", "Dage fra første registede død" = "day_dead"),
               justified = FALSE,
               size = "sm",
               selected = "date",

@@ -6,8 +6,8 @@ output$plot_DanishTimeline <- highcharter::renderHighchart({
   
   colors <- colorspace::qualitative_hcl(5, palette = "Dark 3")
   
-  if(!("cases" %in% show_y1)) DanishTimeline <- DanishTimeline[!is.na(hospitalized_total)]
-  if(!("total" %in% show_y1)) DanishTimeline <- DanishTimeline[!is.na(cases_total)]
+  if(!("cases" %in% show_y2)) DanishTimeline <- DanishTimeline[!is.na(hospitalized_total)]
+  if(!("total" %in% show_y2)) DanishTimeline <- DanishTimeline[!is.na(cases_total)]
   
   hc_plot <- 
     highchart() %>%
