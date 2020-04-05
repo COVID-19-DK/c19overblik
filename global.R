@@ -1,11 +1,15 @@
-suppressPackageStartupMessages(library(shiny))
-suppressPackageStartupMessages(library(jsonlite))
-suppressPackageStartupMessages(library(data.table))
-suppressPackageStartupMessages(library(highcharter))
-suppressPackageStartupMessages(library(magrittr))
-suppressPackageStartupMessages(library(shinyWidgets))
-suppressPackageStartupMessages(library(colorspace))
-suppressPackageStartupMessages(library(shinycssloaders))
+suppressPackageStartupMessages({
+  library(shiny)
+  library(jsonlite)
+  library(data.table)
+  library(highcharter)
+  library(magrittr)
+  library(shinyWidgets)
+  library(colorspace)
+  library(shinycssloaders)
+  library(tidycovid19)
+})
+
 
 source_list <- list.files("functions", full.names = TRUE)
 for(file in source_list) source(file)

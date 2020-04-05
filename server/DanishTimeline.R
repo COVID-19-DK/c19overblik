@@ -13,7 +13,20 @@ output$plot_DanishTimeline <- highcharter::renderHighchart({
     highchart() %>%
     hc_add_theme(hc_theme_elementary()) %>%
     hc_exporting(enabled = TRUE, filename = "c19overblik_DanskTidslinje") %>%
-    hc_xAxis(type = "datetime") %>%
+    hc_xAxis(type = "datetime"
+             # plotLines = list(list(
+             #   value = mean(DanishTimeline$timestamp),
+             #   color = '#ff0000',
+             #   width = 3,
+             #   zIndex = 4,
+             #   label = list(text = "mean",
+             #                style = list( color = '#ff0000', fontWeight = 'bold' )
+             #   )))
+             # plotBands = list(
+             #   from = as.Date("2020-03-20"),
+             #   to = as.Date("2020-04-05"),
+             #   color = "#000000")
+             ) %>%
     hc_plotOptions(column = list(stacking = "normal")) %>%
     hc_tooltip(shared = TRUE,
                headerFormat = "<span style=\"font-size: 12px\">{point.key}</span><br/>")
@@ -47,13 +60,13 @@ output$plot_DanishTimeline <- highcharter::renderHighchart({
     hc_plot <- 
       hc_plot %>%
       hc_add_series(data = DanishTimeline, stack = "indlagt1", color = colors[1],
-                    name = "Indlagte pr. dag", type = "column",
+                    name = "Udvikling i indlagte pr. dag", type = "column",
                     mapping = hcaes(x = timestamp, y = hospitalized_daily)) %>%
       hc_add_series(data = DanishTimeline, stack = "indlagt2", color = colors[2],
-                    name = "Intensiv indlagte pr. dag", type = "column",
+                    name = "Udvikling i intensiv indlagte pr. dag", type = "column",
                     mapping = hcaes(x = timestamp, y = critical_daily)) %>%
       hc_add_series(data = DanishTimeline, stack = "indlagt3", color = colors[3],
-                    name = "Intensiv indlagte i respirator pr. dag", type = "column",
+                    name = "Udvikling i intensiv indlagte i respirator pr. dag", type = "column",
                     mapping = hcaes(x = timestamp, y = respirator_daily))
   }
   
@@ -61,10 +74,10 @@ output$plot_DanishTimeline <- highcharter::renderHighchart({
     hc_plot <- 
       hc_plot %>%
       hc_add_series(data = DanishTimeline, stack = "smittede", color = colors[4],
-                    name = "Registrede smittede pr. dag", type = "column",
+                    name = "Udvikling i registrede smittede pr. dag", type = "column",
                     mapping = hcaes(x = timestamp, y = cases_daily)) %>%
       hc_add_series(data = DanishTimeline, stack = "smittede", color = colors[5],
-                    name = "Testede pr. dag", type = "column",
+                    name = "Udvikling i testede pr. dag", type = "column",
                     mapping = hcaes(x = timestamp, y = tests_daily))
   }
   

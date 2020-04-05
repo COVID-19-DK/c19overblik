@@ -21,7 +21,7 @@ fluidPage(
               label = "Vis:", 
               choices = c("Indlagte" = "hospitalized", "Testede/smittede" = "cases"), 
               justified = FALSE,
-              size = "sm",
+              size = "xs",
               selected = "hospitalized",
               checkIcon = list(
                 yes = tags$i(class = "fa fa-circle", 
@@ -36,9 +36,9 @@ fluidPage(
             checkboxGroupButtons(
               inputId = "DT_show_y2",
               label = "Vis:", 
-              choices = c("Antal akkumulerede over tid" = "total", "Antal nye pr. dag" = "daily"), 
+              choices = c("Akkumulerede over tid" = "total", "Udvikling pr. dag" = "daily"), 
               justified = FALSE,
-              size = "sm",
+              size = "xs",
               selected = "total",
               checkIcon = list(
                 yes = tags$i(class = "fa fa-circle", 
@@ -87,7 +87,7 @@ fluidPage(
               label = "Vis tid efter:",
               choices = c("Dato" = "date", "Dage fra første registerede smittede" = "day_infected", "Dage fra første registede død" = "day_dead"),
               justified = FALSE,
-              size = "sm",
+              size = "xs",
               selected = "date",
               checkIcon = list(
                 yes = tags$i(class = "fa fa-circle",
@@ -104,7 +104,7 @@ fluidPage(
               label = "Vis:",
               choices = c("Antal registrede smittede" = "infected", "Antal døde" = "dead", "Antal raske" = "recovered"),
               justified = FALSE,
-              size = "sm",
+              size = "xs",
               selected = "infected",
               checkIcon = list(
                 yes = tags$i(class = "fa fa-circle",
