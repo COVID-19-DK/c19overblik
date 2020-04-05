@@ -71,8 +71,8 @@ fluidPage(
             pickerInput(
               inputId = "GT_country",
               label = "Lande:",
-              choices = landelist,
-              selected = c("Denmark", "Finland", "Norway", "Sweden", "USA", "UK", "Italy", "Germany", "France", "China"),
+              choices = landeliste$country,
+              selected = c("Denmark", "Finland", "Norway", "Sweden", "USA", "Italy", "Spain", "China"),
               multiple = TRUE,
               options = list(
                 `live-search` = TRUE,

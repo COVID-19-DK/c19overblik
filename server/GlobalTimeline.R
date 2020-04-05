@@ -3,9 +3,16 @@ output$plot_GlobalTimeline <- highcharter::renderHighchart({
   
   show_x <- input$GT_show_x
   show_y <- input$GT_show_y
-  country <- input$GT_country
+  country_select <- input$GT_country
   
-  GlobalTimeline <- GlobalTimeline[countrylabel %in% country]
+  selected_countries <- landeliste[country %in% country_select]$`Timeline Code`
+  
+  GlobalTimeline <- GlobalTimeline[countrycode %in% selected_countries]
+  GlobalTimeline <- 
+    merge(GlobalTimeline,
+          landeliste[, .(countrycode = `Timeline Code`, countrylabel = country)],
+          all.x = TRUE,
+          sort = FALSE)
   
   if(show_x == "date") GlobalTimeline[, x := date]
   if(show_x == "day_infected"){
