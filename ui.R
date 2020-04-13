@@ -71,12 +71,29 @@ fluidPage(
             pickerInput(
               inputId = "GT_country",
               label = "Lande:",
-              choices = landeliste$country,
-              selected = c("Denmark", "Finland", "Norway", "Sweden", "USA", "Italy", "Spain", "China"),
+              choices = landeliste,
+              selected = c("Denmark", "Finland", "Norway", "Sweden", "US", "United Kingdom", "Italy", "Spain", "China"),
               multiple = TRUE,
               options = list(
                 `live-search` = TRUE,
                 `actions-box` = TRUE)
+            )
+          ),
+          
+          div(
+            style = "float: left; margin-right: 20px;",
+            radioGroupButtons(
+              inputId = "GT_show_y2",
+              label = "Vis:",
+              choices = c("Antal" = "count", "Pr. 100.000" = "100k"),
+              justified = FALSE,
+              size = "xs",
+              selected = "count",
+              checkIcon = list(
+                yes = tags$i(class = "fa fa-circle",
+                             style = "color: steelblue"),
+                no = tags$i(class = "fa fa-circle-o",
+                            style = "color: steelblue"))
             )
           ),
 
@@ -85,7 +102,7 @@ fluidPage(
             radioGroupButtons(
               inputId = "GT_show_x",
               label = "Vis tid efter:",
-              choices = c("Dato" = "date", "Dage fra første registerede smittede" = "day_infected", "Dage fra første registede død" = "day_dead"),
+              choices = c("Dato" = "date", "Dage fra nr. 1000 smittede" = "day_infected", "Dage fra 10. dødsfald" = "day_dead"),
               justified = FALSE,
               size = "xs",
               selected = "date",
@@ -121,11 +138,69 @@ fluidPage(
             shinycssloaders::withSpinner(
               highchartOutput("plot_GlobalTimeline", height = "calc(100vh - 220px)"),
               proxy.height = "calc(100vh - 220px)")
-            ),
-
-        p("Kilde: ", a("thevirustracker.com", href = "https://thevirustracker.com", target = "_blank"))
+            )
 
       ),
+      
+      
+      tabPanel(
+        title = "Korrelation",
+
+        div(
+          style="margin-top: 10px; margin-right: 20px;",
+          
+          div(
+            style = "float: left; margin-right: 20px;",
+            pickerInput(
+              inputId = "correlation_x",
+              label = "X:",
+              choices = correlation_list,
+              selected = "deaths_pctpop"
+            )
+          ),
+          
+          div(
+            style = "float: left; margin-right: 20px;",
+            pickerInput(
+              inputId = "correlation_y",
+              label = "Y:",
+              choices = correlation_list,
+              selected = "soc_dist"
+            )
+          ),
+
+          div(
+            style = "float: left; margin-right: 20px;",
+            pickerInput(
+              inputId = "correlation_size",
+              label = "Størrelse:",
+              choices = correlation_list,
+              selected = "population"
+            )
+          ),
+          
+          div(
+            style = "float: left;",
+            sliderInput(
+              inputId = "correlation_date",
+              label = "Dato:",
+              min = as.Date("2020-01-22"),
+              max = Sys.Date()-1,
+              value = Sys.Date()-1,
+              timezone = "CET",
+              timeFormat = "%d. %b %Y")
+          ),
+          
+          div(style = "clear: left", 
+              shinycssloaders::withSpinner(
+                plotlyOutput("plot_correlation", height = "calc(100vh - 220px)"),
+                proxy.height = "calc(100vh - 220px)")
+          )
+          
+        )
+        
+      ),
+      
       
       # tabPanel(
       #   title = "Fremskrivning",

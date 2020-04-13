@@ -1,6 +1,6 @@
 get_tidycovid19 <- function(){
   
-  tidycovid19 <- download_merged_data(cached = TRUE)
+  tidycovid19 <- download_merged_data(silent = TRUE, cached = TRUE)
   tidycovid19 <- as.data.table(tidycovid19)
 
   tidycovid19[, confirmed_pctpop := (confirmed / population) * 100]
@@ -14,3 +14,6 @@ get_tidycovid19 <- function(){
   return(tidycovid19)
   
 }
+
+
+# npi_data <- download_acaps_npi_data(cached = TRUE)

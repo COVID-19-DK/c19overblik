@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y libxml2-dev libcurl4-openssl-dev libssl
 
 
 # Install packages used by c19overblik
-RUN R -e "install.packages(c('remotes', 'shiny', 'shinyWidgets', 'data.table', 'magrittr', 'highcharter', 'jsonlite', 'colorspace', 'shinycssloaders'))"
+RUN R -e "install.packages(c('remotes', 'shiny', 'shinyWidgets', 'data.table', 'magrittr', 'highcharter', 'jsonlite', 'colorspace', 'shinycssloaders', 'ggplot2', 'plotly'))"
 
 RUN R -e "remotes::install_github('joachim-gassen/tidycovid19')"
 

@@ -8,14 +8,41 @@ suppressPackageStartupMessages({
   library(colorspace)
   library(shinycssloaders)
   library(tidycovid19)
+  library(ggplot2)
+  library(plotly)
 })
 
 
 source_list <- list.files("functions", full.names = TRUE)
 for(file in source_list) source(file)
 
+landeliste <- c("Afghanistan", "Angola", "Albania", "Andorra", "United Arab Emirates", "Argentina", "Armenia", "Antigua and Barbuda", "Australia", "Austria", "Azerbaijan", "Burundi", "Belgium", "Benin", "Burkina Faso", "Bangladesh", "Bulgaria", "Bahrain", "Bahamas", "Bosnia and Herzegovina", "Belarus", "Belize", "Bolivia", "Brazil", "Barbados", "Brunei", "Bhutan", "Botswana", "Central African Republic", "Canada", "Switzerland", "Chile", "China", "Cote d'Ivoire", "Cameroon", "Congo (Kinshasa)", "Congo (Brazzaville)", "Colombia", "Cabo Verde", "Costa Rica", "Cuba", "Cyprus", "Czechia", "Germany", "Djibouti", "Dominica", "Denmark", "Dominican Republic", "Algeria", "Ecuador", "Egypt", "Eritrea", "Western Sahara", "Spain", "Estonia", "Ethiopia", "Finland", "Fiji", "France", "Gabon", "United Kingdom", "Georgia", "Ghana", "Guinea", "Gambia", "Guinea-Bissau", "Equatorial Guinea", "Greece", "Grenada", "Guatemala", "Guyana", "Honduras", "Croatia", "Haiti", "Hungary", "Indonesia", "India", "Ireland", "Iran", "Iraq", "Iceland", "Israel", "Italy", "Jamaica", "Jordan", "Japan", "Kazakhstan", "Kenya", "Kyrgyzstan", "Cambodia", "Saint Kitts and Nevis", "Korea", "South", "Kuwait", "Laos", "Lebanon", "Liberia", "Libya", "Saint Lucia", "Liechtenstein", "Sri Lanka", "Lithuania", "Luxembourg", "Latvia", "Morocco", "Monaco", "Moldova", "Madagascar", "Maldives", "Mexico", "North Macedonia", "Mali", "Malta", "Burma", "Montenegro", "Mongolia", "Mozambique", "Mauritania", "Mauritius", "Malawi", "Malaysia", "Namibia", "Niger", "Nigeria", "Nicaragua", "Netherlands", "Norway", "Nepal", "New Zealand", "Oman", "Pakistan", "Panama", "Peru", "Philippines", "Papua New Guinea", "Poland", "Portugal", "Paraguay", "West Bank and Gaza", "Qatar", "Romania", "Russia", "Rwanda", "Saudi Arabia", "Sudan", "Senegal", "Singapore", "Sierra Leone", "El Salvador", "San Marino", "Somalia", "Serbia", "South Sudan", "Suriname", "Slovakia", "Slovenia", "Sweden", "Eswatini", "Seychelles", "Syria", "Chad", "Togo", "Thailand", "Timor-Leste", "Trinidad and Tobago", "Tunisia", "Turkey", "Taiwan*", "Tanzania", "Uganda", "Ukraine", "Uruguay", "US", "Uzbekistan", "Holy See", "Saint Vincent and the Grenadines", "Venezuela", "Vietnam", "South Africa", "Zambia", "Zimbabwe")
 
-landeliste <- fread("landeliste.csv")
+correlation_list <- c(
+  "Antal registrede smittede" = "confirmed",
+  "Antal døde" = "deaths",
+  "Antal raske" = "recovered",
+  "Antal social afstand foranstaltninger" = "soc_dist",
+  "Antal bevægelsesbegrænsende foranstaltninger" = "mov_rest",
+  "Antal folkesundhedsforanstaltninger" = "pub_health",
+  "Antal sociale og økonomiske foranstaltninger" = "soc_econ",
+  "Antal lockdown foranstaltninger" = "lockdown",
+  "Google Trends søgning på 'coronavirus'" = "gtrends_country_score",
+  "Indkomstgruppe" = "income",
+  "Antal indbyggere" = "population",
+  "Areal" = "land_area_skm",
+  "Befolkningstæthed" = "pop_density",
+  "Befolkningstæthed i største by" = "pop_largest_city",
+  "Forventede levealder" = "life_expectancy",
+  "GDP pr. capita" = "gdp_capita",
+  "Pct. registrede smittede af befolkning" = "confirmed_pctpop",
+  "Pct. døde af befolkning" = "deaths_pctpop",
+  "Pct. raske af befolkning" = "recovered_pctpop",
+  "Antal registrede smittede pr. 100.000" = "confirmed_100k",
+  "Antal døde pr. 100.000" = "deaths_100k",
+  "Antal raske pr. 100.000" = "recovered_100k")
+
+# landeliste <- fread("landeliste.csv")
 # landeliste[, V1 := sapply(V1, function(x){
 #   x <- stringr::str_squish(x) %>% strsplit(" ") %>% magrittr::extract2(1)
 #   x <- paste(x[-1], collapse = " ")
